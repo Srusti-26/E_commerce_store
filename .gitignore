@@ -1,0 +1,148 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Environment variables
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Media files (uploaded content) - but keep demo and screenshots
+media/products/
+
+# Keep demo and screenshots for repository
+!media/project_demo/
+!media/Screenshots/
+
+# Static files (collected)
+staticfiles/
+static_root/
+
+# Personal Information - Privacy Protection
+# Hide any files containing personal details
+**/personal_info.py
+**/contact_details.py
+**/private_settings.py
+
+# Sensitive Configuration
+secrets.json
+config.json
+credentials.json
+
+# Database backups
+*.sql
+*.dump
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+*.cache
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Personal notes and documentation
+NOTES.md
+TODO.md
+personal_notes/
+
+# Backup files
+*.bak
+*.backup
+backup/
+
+# Email configurations (privacy)
+email_settings.py
+smtp_config.py
+
+# API keys and tokens
+api_keys.py
+tokens.py
+keys/
+
+# User uploaded content that might contain personal info
+uploads/
+user_files/
+
+# Development databases with personal data
+dev_db.sqlite3
+test_data.json
+
+# Personal scripts
+personal_scripts/
+my_scripts/
+
+# Local configuration overrides
+local_config.py
+dev_settings.py

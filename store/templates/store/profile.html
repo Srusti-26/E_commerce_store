@@ -1,0 +1,968 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}My Profile | E-commerce Store{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Advanced Profile Page Styles */
+    .profile-container {
+        padding: 2rem 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        position: relative;
+    }
+
+    .profile-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="%23fff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        opacity: 0.3;
+    }
+
+    /* Enhanced Navigation Card */
+    .nav-card {
+        background: white;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        overflow: hidden;
+        margin-bottom: 2rem;
+        animation: slideInLeft 0.8s ease-out;
+        position: relative;
+    }
+
+    .nav-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+
+    .nav-header {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-header::after {
+        content: '👤';
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 3rem;
+        opacity: 0.2;
+    }
+
+    .nav-header h5 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .nav-list {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-item {
+        border: none;
+        padding: 1.2rem 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        color: #2c3e50;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transition: width 0.3s ease;
+    }
+
+    .nav-item:hover::before,
+    .nav-item.active::before {
+        width: 5px;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+        background: rgba(102, 126, 234, 0.05);
+        color: #667eea;
+        transform: translateX(10px);
+        padding-left: 2.5rem;
+    }
+
+    .nav-item.active {
+        background: rgba(102, 126, 234, 0.1);
+        font-weight: 700;
+    }
+
+    .nav-item.logout {
+        color: #e74c3c;
+        border-top: 2px solid rgba(231, 76, 60, 0.1);
+    }
+
+    .nav-item.logout:hover {
+        background: rgba(231, 76, 60, 0.05);
+        color: #c0392b;
+    }
+
+    .nav-item.logout::before {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    }
+
+    .nav-icon {
+        font-size: 1.2rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    /* Enhanced Profile Card */
+    .profile-card {
+        background: white;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        overflow: hidden;
+        animation: slideInRight 0.8s ease-out;
+        position: relative;
+    }
+
+    .profile-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 2rem;
+        position: relative;
+        border-bottom: none;
+    }
+
+    .profile-header::after {
+        content: '✏️';
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 3rem;
+        opacity: 0.2;
+    }
+
+    .profile-title {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: #2c3e50;
+        position: relative;
+    }
+
+    .profile-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 2px;
+    }
+
+    .profile-body {
+        padding: 2.5rem;
+    }
+
+    /* User Avatar Section */
+    .user-avatar-section {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        background: rgba(102, 126, 234, 0.05);
+        border-radius: 20px;
+        border: 2px dashed rgba(102, 126, 234, 0.2);
+    }
+
+    .user-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        font-size: 3rem;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        position: relative;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .user-avatar::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        z-index: -1;
+        opacity: 0.3;
+    }
+
+    .user-welcome {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .user-email {
+        color: #7f8c8d;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .user-stats {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #667eea;
+        display: block;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Enhanced Form Styles */
+    .form-section {
+        background: rgba(67, 233, 123, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 2px solid rgba(67, 233, 123, 0.1);
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .form-control {
+        border: 2px solid rgba(102, 126, 234, 0.1);
+        border-radius: 15px;
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        transform: translateY(-2px);
+    }
+
+    .form-control[readonly] {
+        background: rgba(102, 126, 234, 0.05);
+        border-color: rgba(102, 126, 234, 0.2);
+        color: #7f8c8d;
+    }
+
+    /* Enhanced Buttons */
+    .btn-custom {
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border: none;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-custom::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .btn-custom:hover::before {
+        left: 100%;
+    }
+
+    .btn-primary-custom {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-primary-custom:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+
+    .btn-secondary-custom {
+        background: white;
+        border: 2px solid #667eea;
+        color: #667eea;
+    }
+
+    .btn-secondary-custom:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Account Stats Cards */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 20px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 2px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+        border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .stat-icon {
+        font-size: 2.5rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-description {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .profile-container {
+            padding: 1rem 0;
+        }
+        
+        .nav-card,
+        .profile-card {
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-header,
+        .profile-header,
+        .profile-body {
+            padding: 1.5rem;
+        }
+        
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            font-size: 2.5rem;
+        }
+        
+        .user-stats {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Animations */
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Success/Error Messages */
+    .alert-custom {
+        border: none;
+        border-radius: 15px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        animation: fadeInUp 0.5s ease-out;
+    }
+
+    .alert-success-custom {
+        background: rgba(67, 233, 123, 0.1);
+        color: #27ae60;
+        border-left: 4px solid #43e97b;
+    }
+
+    .alert-error-custom {
+        background: rgba(231, 76, 60, 0.1);
+        color: #e74c3c;
+        border-left: 4px solid #e74c3c;
+    }
+
+    /* Loading States */
+    .loading {
+        opacity: 0.6;
+        pointer-events: none;
+        position: relative;
+    }
+
+    .loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(102, 126, 234, 0.3);
+        border-radius: 50%;
+        border-top-color: #667eea;
+        animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="container">
+        <div class="row">
+            <!-- Enhanced Navigation Sidebar -->
+            <div class="col-md-4 mb-4">
+                <div class="card nav-card">
+                    <div class="nav-header">
+                        <h5>Account Dashboard</h5>
+                    </div>
+                    <div class="nav-list">
+                        <a href="{% url 'users:profile' %}" class="nav-item active">
+                            <i class="fas fa-user nav-icon"></i>
+                            My Profile
+                        </a>
+                        <a href="{% url 'users:order_history' %}" class="nav-item">
+                            <i class="fas fa-shopping-bag nav-icon"></i>
+                            Order History
+                        </a>
+                        <a href="#" class="nav-item">
+                            <i class="fas fa-heart nav-icon"></i>
+                            Wishlist
+                        </a>
+                        <a href="#" class="nav-item">
+                            <i class="fas fa-map-marker-alt nav-icon"></i>
+                            Addresses
+                        </a>
+                        <a href="{% url 'account_change_password' %}" class="nav-item">
+                            <i class="fas fa-key nav-icon"></i>
+                            Change Password
+                        </a>
+                        <a href="#" class="nav-item">
+                            <i class="fas fa-bell nav-icon"></i>
+                            Notifications
+                        </a>
+                        <a href="{% url 'account_logout' %}" class="nav-item logout">
+                            <i class="fas fa-sign-out-alt nav-icon"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Profile Content -->
+            <div class="col-md-8">
+                <div class="card profile-card">
+                    <div class="profile-header">
+                        <h5 class="profile-title">My Profile</h5>
+                    </div>
+                    <div class="profile-body">
+                        <!-- User Avatar and Welcome Section -->
+                        <div class="user-avatar-section">
+                            <div class="user-avatar">
+                                {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
+                            </div>
+                            <div class="user-welcome">Welcome back, {{ user.first_name|default:user.username }}!</div>
+                            <div class="user-email">{{ user.email }}</div>
+                            <div class="user-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">12</span>
+                                    <span class="stat-label">Orders</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">5</span>
+                                    <span class="stat-label">Wishlist</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">3</span>
+                                    <span class="stat-label">Reviews</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account Statistics -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <i class="fas fa-shopping-cart stat-icon"></i>
+                                <div class="stat-value">$1,247</div>
+                                <div class="stat-description">Total Spent</div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-trophy stat-icon"></i>
+                                <div class="stat-value">Gold</div>
+                                <div class="stat-description">Member Status</div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-calendar-alt stat-icon"></i>
+                                <div class="stat-value">{{ user.date_joined|date:"M Y" }}</div>
+                                <div class="stat-description">Member Since</div>
+                            </div>
+                        </div>
+
+                        <!-- Profile Form -->
+                        <form method="post" id="profileForm">
+                            {% csrf_token %}
+                            
+                            <!-- Personal Information Section -->
+                            <div class="form-section">
+                                <h6 class="section-title">
+                                    <i class="fas fa-user"></i>
+                                    Personal Information
+                                </h6>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="username" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" readonly>
+                                            <small class="text-muted">Username cannot be changed</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="first_name" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="last_name" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Information Section -->
+                            <div class="form-section">
+                                <h6 class="section-title">
+                                    <i class="fas fa-phone"></i>
+                                    Contact Information
+                                </h6>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="date_of_birth" class="form-label">Date of Birth</label>
+                                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preferences Section -->
+                            <div class="form-section">
+                                <h6 class="section-title">
+                                    <i class="fas fa-cog"></i>
+                                    Preferences
+                                </h6>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="newsletter" class="form-label">Newsletter Subscription</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter" checked>
+                                                <label class="form-check-label" for="newsletter">
+                                                    Receive promotional emails and updates
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="notifications" class="form-label">Order Notifications</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="notifications" name="notifications" checked>
+                                                <label class="form-check-label" for="notifications">
+                                                    Receive order status updates
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="button" class="btn-custom btn-secondary-custom" onclick="resetForm()">
+                                    <i class="fas fa-undo"></i>
+                                    Reset Changes
+                                </button>
+                                <div class="d-flex gap-3">
+                                    <button type="button" class="btn-custom btn-secondary-custom" onclick="previewChanges()">
+                                        <i class="fas fa-eye"></i>
+                                        Preview
+                                    </button>
+                                    <button type="submit" class="btn-custom btn-primary-custom">
+                                        <i class="fas fa-save"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Enhanced form handling
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Add loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission
+        setTimeout(() => {
+            showNotification('✅ Profile updated successfully!', 'success');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Update avatar if name changed
+            updateAvatar();
+        }, 2000);
+    });
+
+    // Reset form functionality
+    function resetForm() {
+        if (confirm('Are you sure you want to reset all changes?')) {
+            document.getElementById('profileForm').reset();
+            showNotification('🔄 Form reset to original values', 'info');
+        }
+    }
+
+    // Preview changes functionality
+    function previewChanges() {
+        const formData = new FormData(document.getElementById('profileForm'));
+        const changes = [];
+        
+        for (let [key, value] of formData.entries()) {
+            if (value.trim()) {
+                changes.push(`${key}: ${value}`);
+            }
+        }
+        
+        if (changes.length > 0) {
+            showNotification(`📋 Preview: ${changes.length} field(s) will be updated`, 'info');
+        } else {
+            showNotification('No changes to preview', 'warning');
+        }
+    }
+
+    // Update avatar based on name changes
+    function updateAvatar() {
+        const firstName = document.getElementById('first_name').value;
+        const lastName = document.getElementById('last_name').value;
+        const username = document.getElementById('username').value;
+        
+        let initials = '';
+        if (firstName) initials += firstName.charAt(0).toUpperCase();
+        if (lastName) initials += lastName.charAt(0).toUpperCase();
+        if (!initials && username) initials = username.charAt(0).toUpperCase();
+        
+        document.querySelector('.user-avatar').textContent = initials || '?';
+        
+        // Update welcome message
+        const welcomeName = firstName || username;
+        document.querySelector('.user-welcome').textContent = `Welcome back, ${welcomeName}!`;
+    }
+
+    // Enhanced notification system
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 350px; animation: slideInRight 0.5s ease; border-radius: 15px;';
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }
+        }, 4000);
+    }
+
+    // Form validation
+    function validateForm() {
+        const email = document.getElementById('email').value;
+        const firstName = document.getElementById('first_name').value;
+        const lastName = document.getElementById('last_name').value;
+        
+        if (!email || !firstName || !lastName) {
+            showNotification('Please fill in all required fields', 'error');
+            return false;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            return false;
+        }
+        
+        return true;
+    }
+
+    // Auto-save functionality
+    let autoSaveTimer;
+    function setupAutoSave() {
+        const inputs = document.querySelectorAll('#profileForm input');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                clearTimeout(autoSaveTimer);
+                autoSaveTimer = setTimeout(() => {
+                    console.log('Auto-saving profile...');
+                    // Implement auto-save logic here
+                }, 3000);
+            });
+        });
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+        // Setup auto-save
+        setupAutoSave();
+        
+        // Add form field animations
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Add navigation item hover effects
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.background = 'rgba(102, 126, 234, 0.05)';
+                }
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.background = '';
+                }
+            });
+        });
+        
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-card').forEach(element => {
+            observer.observe(element);
+        });
+    });
+
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideOutRight {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+{% endblock %}

@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-commerce Store{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --neon-gradient: linear-gradient(135deg, #ff006e 0%, #8338ec 50%, #3a86ff 100%);
+            --sunset-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            --ocean-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --fire-gradient: linear-gradient(135deg, #ff512f 0%, #dd2476 100%);
+            --light-bg: #f8fafc;
+            --shadow-soft: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+            --shadow-neon: 0 0 20px rgba(131, 56, 236, 0.4);
+            --shadow-glow: 0 0 30px rgba(255, 0, 110, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+            opacity: 0.05;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 0.5s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 1.5s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Enhanced Navigation */
+        .navbar {
+            background: var(--neon-gradient) !important;
+            backdrop-filter: blur(15px);
+            box-shadow: var(--shadow-neon);
+            padding: 1rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: navShine 3s infinite;
+        }
+        
+        @keyframes navShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-brand::before {
+            content: '🛍️';
+            margin-right: 10px;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.1) rotate(2deg);
+            color: #ffd700 !important;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: left 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 0;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.4);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Cart Icon Animation */
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-icon::after {
+            content: attr(data-count);
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        .cart-icon[data-count="0"]::after {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Dropdown Enhancements */
+        .dropdown-menu {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            padding: 1rem;
+            margin-top: 10px;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            border-radius: 10px;
+            padding: 0.7rem 1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Enhanced Product Cards */
+        .product-card {
+            height: 100%;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            border-radius: 25px;
+            overflow: hidden;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--neon-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 25px;
+            z-index: -1;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-20px) scale(1.05) rotateY(5deg);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .product-card:hover::after {
+            opacity: 0.05;
+        }
+        
+        .product-card:hover .card-title {
+            background: var(--neon-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .product-card .card-img-top {
+            transition: transform 0.4s ease;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .product-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .product-card .card-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card .card-text {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .price-tag {
+            background: var(--fire-gradient);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 0.5rem 0;
+            box-shadow: 0 6px 20px rgba(255, 81, 47, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: priceGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes priceGlow {
+            0% { box-shadow: 0 6px 20px rgba(255, 81, 47, 0.4); }
+            100% { box-shadow: 0 6px 30px rgba(255, 81, 47, 0.8); }
+        }
+        
+        .price-tag::before {
+            content: '💰';
+            margin-right: 0.5rem;
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Enhanced Buttons */
+        .btn-primary {
+            background: var(--neon-gradient);
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(131, 56, 236, 0.3);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-glow);
+            filter: brightness(1.1);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px) scale(1.02);
+            transition: all 0.1s ease;
+        }
+
+        /* Enhanced Messages */
+        .alert {
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-soft);
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .alert-success {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .alert-warning {
+            background: var(--warning-gradient);
+            color: white;
+        }
+
+        .alert-danger {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+
+        .alert-info {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            margin-top: 50px;
+            padding: 40px 0;
+            background: var(--dark-gradient);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer h5 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #ffd700;
+            transform: translateX(5px);
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Interactive Elements */
+        .interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -3;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(131, 56, 236, 0.1) 0%, transparent 50%);
+            transition: background 0.3s ease;
+        }
+        
+        .glow-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--neon-gradient);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-effect:hover::before {
+            opacity: 0.7;
+            animation: rotate 2s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive Enhancements */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .product-card:hover {
+                transform: translateY(-10px) scale(1.02);
+            }
+            
+            .particle {
+                display: none;
+            }
+            
+            .interactive-bg {
+                display: none;
+            }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--neon-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            box-shadow: var(--shadow-neon);
+            animation: scrollPulse 2s infinite;
+        }
+        
+        @keyframes scrollPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-8px) scale(1.2);
+            box-shadow: var(--shadow-glow);
+            animation: none;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'store:product_list' %}">E-commerce Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store:product_list' %}">
+                            <i class="fas fa-store"></i>Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store:about' %}">
+                            <i class="fas fa-info-circle"></i>About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store:contact' %}">
+                            <i class="fas fa-envelope"></i>Contact
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Search Bar -->
+                <form class="d-flex me-3" method="get" action="{% url 'store:product_list' %}">
+                    <div class="input-group">
+                        <input class="form-control" type="search" name="search" placeholder="Search products..." aria-label="Search" value="{{ request.GET.search }}" style="border-radius: 25px 0 0 25px; border: 2px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;">
+                        <button class="btn" type="submit" style="border-radius: 0 25px 25px 0; border: 2px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.2); color: white;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link cart-icon" href="{% url 'store:cart_detail' %}" id="cartLink" data-count="0">
+                            <i class="fas fa-shopping-cart"></i> Cart
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i> {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{% url 'users:profile' %}">
+                                    <i class="fas fa-user"></i> Profile
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'users:order_history' %}">
+                                    <i class="fas fa-history"></i> Orders
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'account_logout' %}">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_signup' %}">
+                                <i class="fas fa-user-plus"></i> Register
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        {% block content %}
+        <!-- Sample Product Grid -->
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/laptop.jpg" class="card-img-top" alt="Premium Laptop" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #667eea, #764ba2); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-laptop" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Premium Laptop</h5>
+                        <p class="card-text">High-performance laptop perfect for work and gaming.</p>
+                        <div class="price-tag">$999.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/Wireless Headphones.jpg" class="card-img-top" alt="Wireless Headphones" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #f093fb, #f5576c); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-headphones" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Wireless Headphones</h5>
+                        <p class="card-text">Crystal clear sound with noise cancellation technology.</p>
+                        <div class="price-tag">$199.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/Smartphone Pro.png" class="card-img-top" alt="Smartphone" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #4facfe, #00f2fe); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-mobile-alt" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Smartphone</h5>
+                        <p class="card-text">Latest smartphone with advanced camera and features.</p>
+                        <div class="price-tag">$699.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/Smart Watch.webp" class="card-img-top" alt="Smart Watch" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #43e97b, #38f9d7); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-clock" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Smart Watch</h5>
+                        <p class="card-text">Advanced fitness tracking and smart notifications.</p>
+                        <div class="price-tag">$299.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/Running Shoes.jpg" class="card-img-top" alt="Running Shoes" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #fa709a, #fee140); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-running" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Running Shoes</h5>
+                        <p class="card-text">Comfortable and durable shoes for your daily runs.</p>
+                        <div class="price-tag">$129.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/Programming Guide.jpg" class="card-img-top" alt="Programming Guide" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #a8edea, #fed6e3); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-book" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Programming Guide</h5>
+                        <p class="card-text">Complete guide to modern programming languages.</p>
+                        <div class="price-tag">$49.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/coffee-is-life-t-shirt-design-vector.jpg" class="card-img-top" alt="Coffee T-Shirt" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #667eea, #764ba2); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-tshirt" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Coffee T-Shirt</h5>
+                        <p class="card-text">Stylish t-shirt for coffee lovers everywhere.</p>
+                        <div class="price-tag">$24.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/coffee_machine.png" class="card-img-top" alt="Coffee Machine" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #f093fb, #f5576c); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-coffee" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Coffee Machine</h5>
+                        <p class="card-text">Premium coffee machine for perfect brewing.</p>
+                        <div class="price-tag">$399.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/yoga-mat.jpg" class="card-img-top" alt="Yoga Mat" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #4facfe, #00f2fe); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-leaf" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Yoga Mat</h5>
+                        <p class="card-text">High-quality mat for your yoga and fitness routines.</p>
+                        <div class="price-tag">$39.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="/media/products/2025/07/29/gaming-mouse.jpg" class="card-img-top" alt="Gaming Mouse" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="height: 250px; background: linear-gradient(45deg, #43e97b, #38f9d7); display: none; align-items: center; justify-content: center;">
+                        <i class="fas fa-mouse" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Gaming Mouse</h5>
+                        <p class="card-text">Precision gaming mouse with RGB lighting.</p>
+                        <div class="price-tag">$79.99</div>
+                        <button class="btn btn-primary w-100 mt-2">
+                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-store me-2"></i>E-commerce Store</h5>
+                    <p>Your trusted partner for quality products and exceptional service.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="fas fa-link me-2"></i>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'store:about' %}"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
+                        <li><a href="{% url 'store:contact' %}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right me-2"></i>Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="fas fa-envelope me-2"></i>Contact Info</h5>
+                    <p><i class="fas fa-phone me-2"></i>phone number not being displayed due to Privacy</p>
+                    <p><i class="fas fa-envelope me-2"></i>1nt23ad052.srusti@nmit.ac.in</p>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.2);">
+            <div class="text-center">
+                <p>&copy; 2025 E-commerce Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('mainNavbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to top functionality
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add loading state to buttons
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.classList.contains('loading')) {
+                    this.classList.add('loading');
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<span class="loading-spinner"></span> Adding...';
+                    
+                    setTimeout(() => {
+                        this.classList.remove('loading');
+                        this.innerHTML = originalText;
+                    }, 2000);
+                }
+            });
+        });
+
+        // Enhanced card interactions with sound effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-20px) scale(1.05) rotateY(5deg)';
+                this.style.boxShadow = 'var(--shadow-glow)';
+                
+                // Add ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(131, 56, 236, 0.3);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                    top: 50%;
+                    left: 50%;
+                    width: 100px;
+                    height: 100px;
+                    margin-top: -50px;
+                    margin-left: -50px;
+                `;
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1) rotateY(0deg)';
+                this.style.boxShadow = 'var(--shadow-soft)';
+            });
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Auto-dismiss alerts after 5 seconds
+        document.querySelectorAll('.alert').forEach(alert => {
+            setTimeout(() => {
+                if (alert.classList.contains('show')) {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }
+            }, 5000);
+        });
+
+        // Initialize cart count on page load
+        updateCartCount();
+        
+        // Interactive background that follows mouse
+        const interactiveBg = document.createElement('div');
+        interactiveBg.className = 'interactive-bg';
+        document.body.appendChild(interactiveBg);
+        
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            interactiveBg.style.setProperty('--mouse-x', x + '%');
+            interactiveBg.style.setProperty('--mouse-y', y + '%');
+        });
+        
+        // Add glow effect to buttons
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.classList.add('glow-effect');
+        });
+        
+        // Celebration effect for successful actions
+        function createCelebration(element) {
+            const colors = ['#ff006e', '#8338ec', '#3a86ff', '#ffd60a', '#06ffa5'];
+            for (let i = 0; i < 15; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    left: ${element.getBoundingClientRect().left + element.offsetWidth/2}px;
+                    top: ${element.getBoundingClientRect().top}px;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    animation: confetti-fall 1s ease-out forwards;
+                `;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 1000);
+            }
+        }
+        
+        // Add confetti animation
+        const confettiStyle = document.createElement('style');
+        confettiStyle.textContent = `
+            @keyframes confetti-fall {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(200px) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(confettiStyle);
+    });
+
+    // Global cart management functions
+    function updateCartCount() {
+        fetch('/api/cart/')
+        .then(response => response.json())
+        .then(data => {
+            const cartLink = document.getElementById('cartLink');
+            if (cartLink) {
+                cartLink.setAttribute('data-count', data.cart_count);
+            }
+        })
+        .catch(error => console.log('Error updating cart count:', error));
+    }
+
+    function addToCart(productId, quantity = 1) {
+        fetch(`/add/${productId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': getCookie('csrftoken'),
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: `quantity=${quantity}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateCartCount();
+                showGlobalNotification(data.message, 'success');
+                
+                // Enhanced cart icon animation
+                const cartIcon = document.querySelector('.cart-icon');
+                if (cartIcon) {
+                    cartIcon.style.transform = 'scale(1.3) rotate(10deg)';
+                    cartIcon.style.color = '#43e97b';
+                    cartIcon.style.textShadow = '0 0 10px #43e97b';
+                    
+                    // Create celebration effect
+                    createCelebration(cartIcon);
+                    
+                    setTimeout(() => {
+                        cartIcon.style.transform = 'scale(1) rotate(0deg)';
+                        cartIcon.style.color = '';
+                        cartIcon.style.textShadow = '';
+                    }, 500);
+                }
+            } else {
+                showGlobalNotification('Failed to add item to cart', 'error');
+            }
+        })
+        .catch(error => {
+            showGlobalNotification('Error adding item to cart', 'error');
+        });
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function showGlobalNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 300px; animation: slideInRight 0.5s ease; border-radius: 15px;';
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }
+        }, 4000);
+    }
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

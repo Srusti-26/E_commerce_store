@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - E-commerce Store{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <div class="hero-section" style="background: var(--primary-gradient); border-radius: 25px; padding: 4rem 2rem; color: white; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; opacity: 0.3;"></div>
+                <div style="position: relative; z-index: 2;">
+                    <h1 class="display-4 fw-bold mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                        <i class="fas fa-heart me-3" style="color: #ff6b6b;"></i>About Our Store
+                    </h1>
+                    <p class="lead mb-0" style="font-size: 1.3rem; opacity: 0.9;">
+                        Your trusted partner for quality products and exceptional service
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Story Section -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="story-card" style="background: white; border-radius: 20px; padding: 2.5rem; box-shadow: var(--shadow-soft); height: 100%;">
+                <h2 class="h3 mb-4" style="color: #2c3e50; font-weight: 600;">
+                    <i class="fas fa-book-open me-3" style="color: var(--primary-gradient); background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>Our Story
+                </h2>
+                <p class="text-muted mb-3" style="line-height: 1.8;">
+                    Founded with a passion for bringing quality products to customers worldwide, our e-commerce store has been serving the community with dedication and excellence since our inception.
+                </p>
+                <p class="text-muted mb-3" style="line-height: 1.8;">
+                    We believe in the power of technology to connect people with the products they love, making shopping convenient, secure, and enjoyable for everyone.
+                </p>
+                <p class="text-muted mb-0" style="line-height: 1.8;">
+                    Our journey started with a simple idea: to create an online marketplace that prioritizes customer satisfaction above all else.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="image-placeholder" style="background: var(--success-gradient); border-radius: 20px; height: 350px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%); animation: shimmer 3s infinite;"></div>
+                <i class="fas fa-store" style="font-size: 5rem; color: white; opacity: 0.8;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="row mb-5">
+        <div class="col-lg-6 mb-4">
+            <div class="mission-card" style="background: white; border-radius: 20px; padding: 2.5rem; box-shadow: var(--shadow-soft); height: 100%; border-top: 4px solid; border-image: var(--primary-gradient) 1;">
+                <div class="text-center mb-4">
+                    <div style="width: 80px; height: 80px; background: var(--primary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                        <i class="fas fa-bullseye" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                </div>
+                <h3 class="h4 text-center mb-4" style="color: #2c3e50; font-weight: 600;">Our Mission</h3>
+                <p class="text-muted text-center mb-0" style="line-height: 1.8;">
+                    To provide high-quality products at competitive prices while delivering exceptional customer service and creating lasting relationships with our customers.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="vision-card" style="background: white; border-radius: 20px; padding: 2.5rem; box-shadow: var(--shadow-soft); height: 100%; border-top: 4px solid; border-image: var(--success-gradient) 1;">
+                <div class="text-center mb-4">
+                    <div style="width: 80px; height: 80px; background: var(--success-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                        <i class="fas fa-eye" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                </div>
+                <h3 class="h4 text-center mb-4" style="color: #2c3e50; font-weight: 600;">Our Vision</h3>
+                <p class="text-muted text-center mb-0" style="line-height: 1.8;">
+                    To become the most trusted and preferred online shopping destination, known for innovation, reliability, and customer-centric approach.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="text-center mb-5" style="color: #2c3e50; font-weight: 600;">
+                <i class="fas fa-star me-3" style="color: #ffd700;"></i>Why Choose Us?
+            </h2>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="feature-card text-center" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: var(--shadow-soft); height: 100%; transition: all 0.3s ease;">
+                <div style="width: 70px; height: 70px; background: var(--primary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-shipping-fast" style="font-size: 1.8rem; color: white;"></i>
+                </div>
+                <h4 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">Fast Shipping</h4>
+                <p class="text-muted mb-0" style="font-size: 0.9rem;">Quick and reliable delivery to your doorstep</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="feature-card text-center" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: var(--shadow-soft); height: 100%; transition: all 0.3s ease;">
+                <div style="width: 70px; height: 70px; background: var(--success-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-shield-alt" style="font-size: 1.8rem; color: white;"></i>
+                </div>
+                <h4 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">Secure Shopping</h4>
+                <p class="text-muted mb-0" style="font-size: 0.9rem;">Your data and transactions are always protected</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="feature-card text-center" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: var(--shadow-soft); height: 100%; transition: all 0.3s ease;">
+                <div style="width: 70px; height: 70px; background: var(--warning-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-medal" style="font-size: 1.8rem; color: white;"></i>
+                </div>
+                <h4 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">Quality Products</h4>
+                <p class="text-muted mb-0" style="font-size: 0.9rem;">Carefully curated products from trusted brands</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="feature-card text-center" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: var(--shadow-soft); height: 100%; transition: all 0.3s ease;">
+                <div style="width: 70px; height: 70px; background: var(--secondary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fas fa-headset" style="font-size: 1.8rem; color: white;"></i>
+                </div>
+                <h4 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">24/7 Support</h4>
+                <p class="text-muted mb-0" style="font-size: 0.9rem;">Round-the-clock customer support</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row">
+        <div class="col-12">
+            <div class="cta-section text-center" style="background: var(--dark-gradient); border-radius: 25px; padding: 3rem 2rem; color: white; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.3;"></div>
+                <div style="position: relative; z-index: 2;">
+                    <h2 class="h3 mb-3" style="font-weight: 600;">Ready to Start Shopping?</h2>
+                    <p class="mb-4" style="opacity: 0.9;">Discover amazing products and enjoy a seamless shopping experience</p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                        <a href="{% url 'store:product_list' %}" class="btn btn-primary btn-lg" style="border-radius: 25px; padding: 0.8rem 2.5rem;">
+                            <i class="fas fa-shopping-bag me-2"></i>Shop Now
+                        </a>
+                        <a href="{% url 'store:contact' %}" class="btn btn-outline-light btn-lg" style="border-radius: 25px; padding: 0.8rem 2.5rem;">
+                            <i class="fas fa-envelope me-2"></i>Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes colorShift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+.feature-card {
+    animation: float 3s ease-in-out infinite;
+    animation-delay: calc(var(--delay, 0) * 0.2s);
+}
+
+.feature-card:hover {
+    transform: translateY(-15px) scale(1.05) rotateY(10deg);
+    box-shadow: var(--shadow-glow) !important;
+    animation: none;
+}
+
+.feature-card:nth-child(1) { --delay: 1; }
+.feature-card:nth-child(2) { --delay: 2; }
+.feature-card:nth-child(3) { --delay: 3; }
+.feature-card:nth-child(4) { --delay: 4; }
+
+.story-card:hover,
+.mission-card:hover,
+.vision-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-glow) !important;
+}
+
+.hero-section {
+    animation: colorShift 10s linear infinite;
+}
+
+.image-placeholder {
+    animation: float 4s ease-in-out infinite;
+}
+
+.cta-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: rotate 4s linear infinite;
+    z-index: 1;
+}
+
+.cta-section > div {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+{% endblock %}
