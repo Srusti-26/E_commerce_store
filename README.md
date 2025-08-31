@@ -1,4 +1,4 @@
-# E-Commerce Store - Modern Django Web Application
+# E-Commerce Store - Modern Django Web Application 🧿
 
 **Author:** Srusti  
 **Version:** 1.0.0  
@@ -6,38 +6,41 @@
 
 A feature-rich, modern e-commerce platform built with Django and Bootstrap 5.   Complete shopping experience with product listings, cart functionality, user authentication, and order processing.
 
-## Demo 
+## 🎥 Demo Video
 
-![Demo ](media/project_demo/DEMO.gif)
+**📹 Watch the complete demo:** [DEMO.mp4](./media/project_demo/DEMO.mp4)
+
+## 🎬 Demo GIF
+
+![Demo GIF](./media/project_demo/DEMO.gif)
 
 *Quick preview of the application in action*
 
-*Complete demo showcasing all features including product browsing, cart operations, checkout process, and user authentication - check media/project_demo/DEMO.mp4*
+> **📺 For complete functionality demonstration including sorting, search, and cart operations, watch the demo video above!**
 
+## 📸 Screenshots
 
-## Screenshots
+### 🏠 Homepage - Product Listings
+![Homepage](./media/Screenshots/Home.jpeg)
 
-### Homepage - Product Listings
-![Homepage](media/Screenshots/Home.jpeg)
+### 📱 Product Details
+![Product Details](./media/Screenshots/Product_detail.jpeg)
 
-### Product Details
-![Product Details](media/Screenshots/Product_detail.jpeg)
+### 🛒 Shopping Cart
+![Shopping Cart](./media/Screenshots/Cart.jpeg)
 
-### Shopping Cart
-![Shopping Cart](media/Screenshots/Cart.jpeg)
+### 🔍 Search Functionality
+![Search](./media/Screenshots/Search.jpeg)
 
-### Search Functionality
-![Search](media/Screenshots/Search.jpeg)
+### 🔐 User Authentication
+![Login](./media/Screenshots/Login.jpeg)
+![Register](./media/Screenshots/Register.jpeg)
 
-### User Authentication
-![Login](media/Screenshots/Login.jpeg)
-![Register](media/Screenshots/Register.jpeg)
+### ℹ️ About Page
+![About](./media/Screenshots/About.jpeg)
 
-### About Page
-![About](media/Screenshots/About.jpeg)
-
-### Contact Page
-![Contact](media/Screenshots/Contact.jpeg)
+### 📞 Contact Page
+![Contact](./media/Screenshots/Contact.jpeg)
 
 #### Note: For complete functionality demonstration including sorting, search, and cart operations, refer to media/project_demo/DEMO.mp4 (demo video)
 
@@ -146,7 +149,7 @@ E_commerce_store/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/E_commerce_store.git
+   git clone https://github.com/Srusti-26/E_commerce_store.git
    cd E_commerce_store
    ```
 
