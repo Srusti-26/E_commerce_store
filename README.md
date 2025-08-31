@@ -6,40 +6,40 @@
 
 A feature-rich, modern e-commerce platform built with Django and Bootstrap 5.   Complete shopping experience with product listings, cart functionality, user authentication, and order processing.
 
-## 🎥 Demo Video
+## Demo 
 
-**📹 Watch the complete demo:** [DEMO.mp4](./media/project_demo/DEMO.mp4)
 
-## 🎬 Demo GIF
 
 ![Demo GIF](./media/project_demo/DEMO.gif)
 
 *Quick preview of the application in action*
 
-> **📺 For complete functionality demonstration including sorting, search, and cart operations, watch the demo video above!**
+**Watch the complete demo:** [DEMO.mp4](./media/project_demo/DEMO.mp4)
 
-## 📸 Screenshots
+> **For complete functionality demonstration including sorting, search, and cart operations, watch the demo video above!**
 
-### 🏠 Homepage - Product Listings
+## Screenshots
+
+### Homepage - Product Listings
 ![Homepage](./media/Screenshots/Home.jpeg)
 
-### 📱 Product Details
+### Product Details
 ![Product Details](./media/Screenshots/Product_detail.jpeg)
 
-### 🛒 Shopping Cart
+### Shopping Cart
 ![Shopping Cart](./media/Screenshots/Cart.jpeg)
 
-### 🔍 Search Functionality
+### Search Functionality
 ![Search](./media/Screenshots/Search.jpeg)
 
-### 🔐 User Authentication
+### User Authentication
 ![Login](./media/Screenshots/Login.jpeg)
 ![Register](./media/Screenshots/Register.jpeg)
 
-### ℹ️ About Page
+### About Page
 ![About](./media/Screenshots/About.jpeg)
 
-### 📞 Contact Page
+### Contact Page
 ![Contact](./media/Screenshots/Contact.jpeg)
 
 #### Note: For complete functionality demonstration including sorting, search, and cart operations, refer to media/project_demo/DEMO.mp4 (demo video)
@@ -426,26 +426,9 @@ For support and questions:
 - Bootstrap team for the responsive CSS framework
 - Font Awesome for the icon library
 - Python community for excellent packages
-- NMIT for educational support
 
 ---
 
 **⭐ Star this repository if you found it helpful!**
 
 *Built with ❤️ by Srusti using Django and Bootstrap*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
