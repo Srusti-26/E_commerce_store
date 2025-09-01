@@ -350,7 +350,7 @@ python manage.py test
 
 **IMPORTANT: This project is under a Proprietary License**
 
-- **Personal Use**: Allowed for learning and personal projects
+- **Personal Use**: Allowed for learning 
 - **Commercial Use**: Not permitted without explicit written permission
 - **Distribution**: Cannot distribute, sell, or sublicense without permission
 - **Modification**: Personal modifications allowed, commercial modifications require permission
